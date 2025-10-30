@@ -75,14 +75,18 @@ function createCell(cellSize) {
 
 	// add hovering effect to cell
 	{
+		const randomColor = `rgb(${Math.random() * 255}, ${
+			Math.random() * 255
+		}, ${Math.random() * 255})`;
 		let cooldown = 0;
 		cell.addEventListener("mouseenter", () => {
 			cell.style.backgroundColor = "red";
+			cell.style.opacity = +cell.style.opacity + 0.25;
 		});
 		cell.addEventListener("mouseleave", (event) => {
 			cooldown += 0.2;
 			setTimeout(
-				() => (cell.style.backgroundColor = "gray"),
+				() => (cell.style.backgroundColor = randomColor),
 				cooldown * 1000
 			);
 		});
