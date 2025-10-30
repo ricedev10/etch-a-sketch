@@ -1,6 +1,9 @@
 "use strict";
 const body = document.querySelector("body");
 const gridSize = document.querySelector("#grid-size");
+const showCellBorder = document.querySelector(
+	".show-cell-border"
+);
 
 const pixelDensityInput = document.querySelector(
 	".pixel-density"
@@ -42,6 +45,15 @@ body.appendChild(container);
 let grid = createGrid(+gridSize.value, pixelDensity);
 container.appendChild(grid);
 
+// show the border of cells
+showCellBorder.addEventListener("input", (event) => {
+	const isChecked = showCellBorder.checked;
+	let borderStyle = isChecked ? "solid" : "none";
+	for (const cell of document.querySelectorAll(".cell")) {
+		cell.style.borderStyle = borderStyle;
+	}
+});
+
 // configuration of grid
 gridSize.addEventListener("focusout", updateGrid);
 gridSize.addEventListener("input", (event) =>
@@ -67,9 +79,12 @@ function updateGrid() {
 
 function createCell(cellSize) {
 	const cell = document.createElement("div");
+	cell.setAttribute("class", "cell");
 	cell.style.backgroundColor = "gray";
-	cell.style.borderStyle = "solid";
-	cell.style.borderWidth = "0px";
+	cell.style.borderStyle = showCellBorder.checked
+		? "solid"
+		: "none";
+	cell.style.borderWidth = "1px";
 	cell.style.width = cellSize + "px";
 	cell.style.height = cellSize + "px";
 
