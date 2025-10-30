@@ -79,7 +79,7 @@ function createCell(cellSize) {
 		cell.addEventListener("mouseenter", () => {
 			cell.style.backgroundColor = "red";
 		});
-		cell.addEventListener("mouseleave", () => {
+		cell.addEventListener("mouseleave", (event) => {
 			cooldown += 0.2;
 			setTimeout(
 				() => (cell.style.backgroundColor = "gray"),
